@@ -1,0 +1,28 @@
+{{#extend "layouts/main"}}
+
+    {{#content "body"}}
+
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel transactions-list">
+                    <h3>Transactions</h3>
+                    <table class="highlight">
+                        <thead>
+                        <tr>
+                            <th class="hash">Hash</th>
+                            <th class="age">Age</th>
+                            <th class="contract">Contract</th>
+                            <th class="from">From</th>
+                            <th class="method">Type</th>
+                        </tr>
+                        </thead>
+                        <tbody class="transactions">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="transaction-modal" class="modal"><div class="modal-content"></div></div>
+    {{/content}}
+
+{{/extend}}

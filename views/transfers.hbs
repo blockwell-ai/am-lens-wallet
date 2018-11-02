@@ -1,0 +1,30 @@
+{{#extend "layouts/main"}}
+
+    {{#content "body"}}
+        <div class="row">
+            <div class="col s12">
+                <div class="back">
+                    <a href="/app/wallet"><i class="material-icons">arrow_back_ios</i> Back to dashboard</a>
+                </div>
+                <div class="card-panel transfers-list">
+                    <h3>Token Transfers</h3>
+                    <div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th class="block">Block</th>
+                                <th class="from">From</th>
+                                <th class="to">To</th>
+                                <th class="amount">Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody class="transfers">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/content}}
+
+{{/extend}}

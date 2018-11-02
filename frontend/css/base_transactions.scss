@@ -1,0 +1,79 @@
+.transactions-list {
+  overflow-x: auto;
+
+  table {
+    table-layout: fixed;
+    tbody {
+      font-size: 12px;
+
+      tr {
+        cursor: pointer;
+      }
+
+      @media only screen and (max-width: 620px) {
+        font-size: 0.8em;
+      }
+    }
+    .hash {
+      width: 35%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      @media only screen and (max-width: 425px) {
+        width: 45%;
+        padding-right: 20px;
+      }
+    }
+    td.hash {
+      font-family: monospace;
+      font-size: 0.9em;
+    }
+    .age {
+      width: 10%;
+      @media only screen and (max-width: 425px) {
+        width: auto;
+      }
+    }
+    .from {
+      font-family: monospace;
+      font-size: 0.9em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      @media only screen and (max-width: 425px) {
+        display: none;
+      }
+    }
+    .contract {
+      width: 14%;
+      @media only screen and (max-width: 425px) {
+        display: none;
+      }
+    }
+    .method {
+      width: 10%;
+      @media only screen and (max-width: 425px) {
+        display: none;
+      }
+    }
+
+    .amount {
+      width: 10%;
+      @media only screen and (max-width: 425px) {
+        width: 25%;
+      }
+    }
+  }
+}
+
+
+.transaction {
+  .transaction-hash-title {
+    font-size: 13px;
+    padding-bottom: 5px;
+    margin: 15px 0 5px 0;
+  }
+  .transaction-hash {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 20px;
+  }
+}

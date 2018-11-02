@@ -1,0 +1,92 @@
+.wallet-addresses {
+  overflow-x: auto;
+}
+
+.address-default-heading {
+  @media only screen and (max-width: 425px) {
+    display: none;
+  }
+}
+
+td.address {
+  font-family: monospace;
+  font-size: 0.8em;
+}
+td.default {
+  i {
+    font-size: 20px;
+  }
+}
+
+.current-transfers .transfer {
+  margin-bottom: 20px;
+
+  .hidden {
+    display: none;
+  }
+
+  .transfer-id {
+    font-weight: bold;
+  }
+
+  .status {
+    text-transform: capitalize;
+    font-style: italic;
+  }
+
+  .transfer-from, .transfer-to {
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+}
+
+.wallet-test {
+  pre {
+    font-size: 0.8em;
+    overflow-x: auto;
+  }
+}
+
+.balance-wrap {
+  font-size: 13px;
+}
+
+.test-accounts {
+  margin-top: 30px;
+  font-size: 12px;
+
+  .test-account {
+    margin: 16px 0;
+
+    .email {
+      font-weight: bold;
+    }
+    .address {
+      font-family: 'Roboto Mono', monospace;
+    }
+  }
+}
+
+.to-account-label {
+  display: flex;
+  margin-left: 12px;
+
+  label {
+    padding-top: 3px;
+  }
+}
+.to-account-selector {
+  display: flex;
+  margin-left: 12px;
+  > span {
+    cursor: pointer;
+    padding: 1px 12px 0;
+    text-transform: none;
+    font-size: 12px;
+    line-height: 1.38;
+    background: transparent;
+  }
+}
+.input-field.to-account {
+  margin-top: 0;
+}

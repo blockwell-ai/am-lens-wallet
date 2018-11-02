@@ -1,0 +1,45 @@
+{{#extend "layouts/main"}}
+
+    {{#content "body"}}
+        <div class="row">
+            <div class="col s12 l6 offset-l3">
+                <div class="back">
+                    <a href="/app/wallet"><i class="material-icons">arrow_back_ios</i> Back to dashboard</a>
+                </div>
+                <div class="card-panel transaction">
+                    <h3 class="transaction-hash-title">Transaction Hash</h3>
+                    <div class="transaction-hash clipboard" data-clipboard-name="transaction hash"></div>
+
+                    <h3>Summary</h3>
+                    <div class="info-table summary">
+                        <div class="info-row">
+                            <span class="label">Timestamp</span>
+                            <span class="value value-timestamp"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">From</span>
+                            <span class="value value-from clipboard" data-clipboard-name="from"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Contract</span>
+                            <span class="value value-contract"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Function</span>
+                            <span class="value value-function"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Parameters</span>
+                            <span class="value value-parameters"></span>
+                        </div>
+                    </div>
+
+                    <h3>Events</h3>
+                    <div class="events-wrapper">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/content}}
+
+{{/extend}}

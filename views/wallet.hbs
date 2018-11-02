@@ -1,0 +1,82 @@
+{{#extend "layouts/main"}}
+
+    {{#content "body"}}
+        <div class="row">
+            <div class="col s12 xl6">
+                <div class="card wallet-addresses">
+                    <div class="card-title">
+                        <h3>Accounts</h3>
+                    </div>
+                    <div class="card-content">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Address</th>
+                                <th><span class="address-default-heading">Default</span></th>
+                            </tr>
+                            </thead>
+                            <tbody class="accounts">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 xl6">
+                <div class="card wallet-balances">
+                    <div class="card-title">
+                        <h3>Token Balance</h3>
+                        <a href="/app/send" class="btn-small">Send Tokens</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="input-field">
+                            <select class="account-selector">
+                            </select>
+                            <label>Account</label>
+                        </div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Token</th>
+                                <th>Balance</th>
+                            </tr>
+                            </thead>
+                            <tbody class="balances">
+                            <tr>
+                                <td><a href="/app/transfers">{{tokenName}}</a></td>
+                                <td class="token1-balance balance">...</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-title">
+                        <h3>Transactions</h3>
+                    </div>
+                    <div class="card-content transactions-list">
+                        <table class="highlight">
+                            <thead>
+                            <tr>
+                                <th class="hash">Hash</th>
+                                <th class="age">Age</th>
+                                <th class="from">From</th>
+                                <th class="contract">Contract</th>
+                                <th class="method">Type</th>
+                                <th class="amount">Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody class="transactions">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="transaction-modal" class="modal"><div class="modal-content"></div></div>
+    {{/content}}
+{{/extend}}

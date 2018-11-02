@@ -1,0 +1,68 @@
+.transfers-list, .address-transfers {
+  overflow-x: auto;
+
+  table {
+    tbody {
+      font-size: 0.8em;
+    }
+    .from, .to {
+      .value {
+        font-family: monospace;
+        font-size: 0.9em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .label {
+      display: none;
+    }
+
+    @media only screen and (max-width: 620px) {
+      thead {
+        display: none;
+      }
+      .block {
+        order: 0;
+      }
+      .amount {
+        order: 1;
+      }
+      .from {
+        order: 2;
+      }
+      .to {
+        order: 3;
+      }
+
+      .label {
+        display: block;
+      }
+      tr {
+        display: flex;
+        flex-direction: column;
+        border-bottom: none;
+        padding: 5px 0;
+      }
+      td {
+        font-size: 11px;
+        line-height: 24px;
+        display: flex;
+        padding: 0;
+        .label {
+          width: 15%;
+          font-weight: bold;
+        }
+        .value {
+          width: 80%;
+        }
+      }
+    }
+  }
+
+  .address-title {
+    font-family: monospace;
+  }
+}
+
+

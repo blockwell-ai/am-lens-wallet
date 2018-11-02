@@ -1,0 +1,206 @@
+h2 {
+  font-size: 3em;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.main-header {
+  .header-content {
+    max-width: 1194px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 12px;
+
+    .main-logo {
+      margin: 0 16px;
+
+      img {
+        display: block;
+      }
+    }
+    h1 {
+      flex: 1 1 auto;
+      line-height: 50px;
+      font-size: 22px;
+      margin: 5px 0 0;
+      padding: 0;
+      font-weight: bold;
+      font-family: Arial, Helvetica, "Helvetica Neue", serif;
+
+      @media only screen and (max-width: 425px) {
+        font-size: 18px;
+      }
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 30px;
+      font-size: 16px;
+
+      .user-email {
+        margin-right: 12px;
+
+        @media only screen and (max-width: 425px) {
+          display: none;
+        }
+      }
+
+      .logout {
+        @media only screen and (max-width: 425px) {
+          display: none;
+        }
+
+        a {
+          margin-left: 12px;
+        }
+      }
+
+      i {
+        display: block;
+        font-size: 28px;
+        line-height: 28px;
+      }
+
+      .user-email-dropdown {
+        line-height: 50px;
+        padding: 0 14px;
+      }
+    }
+  }
+}
+
+.main-body {
+  > .content {
+    max-width: 1194px;
+    margin: 0 auto;
+    padding-top: 50px;
+
+    @media only screen and (max-width: 995px) {
+      padding-top: 16px;
+    }
+  }
+}
+
+.page-title {
+  margin-bottom: 1em;
+}
+
+
+.card .card-title {
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media only screen and (max-width: 425px) {
+    padding: 0 10px;
+  }
+
+  h3 {
+    margin: 0;
+    line-height: 42px;
+  }
+  .btn, .btn-small {
+    background-color: transparent;
+    font-weight: bold;
+    text-transform: none;
+  }
+  .btn-small {
+    height: 30px;
+    line-height: 30px;
+  }
+}
+
+.card .card-content {
+  @media only screen and (max-width: 425px) {
+    padding: 10px 10px 20px;
+  }
+}
+
+.back {
+  margin-top: -20px;
+  font-size: 16px;
+  i {
+    font-size: 12px;
+  }
+  @media only screen and (max-width: 425px) {
+    margin-top: 0;
+  }
+}
+
+.info-table {
+  .info-row {
+    padding: 7px 0;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+
+    .label {
+      display: block;
+      width: 35%;
+      font-weight: bold;
+    }
+
+    .value {
+      display: block;
+      width: 65%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}
+
+.clipboard {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 425px) {
+  td {
+    padding: 7px 5px;
+  }
+
+  .select-wrapper input.select-dropdown {
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+  }
+  .row {
+    margin-bottom: 0;
+  }
+
+  .card {
+    margin: 7px 0;
+  }
+
+  .card-panel {
+    padding: 10px;
+  }
+
+  .main-body {
+    input[type=text], input[type=email], input[type=number] {
+      padding-right: 25px;
+      box-sizing: border-box;
+      text-overflow: ellipsis;
+      font-size: 14px;
+    }
+  }
+
+  .select-dropdown.dropdown-content li > span {
+    font-size: 14px;
+  }
+}
+
