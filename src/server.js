@@ -17,6 +17,7 @@ const serve = require('koa-static-server');
 const parser = require('koa-bodyparser');
 const middleware = require('am-lens/middleware');
 const template = require('am-lens/template');
+const db = require('am-lens/db');
 const router = require('./routes');
 
 const app = new Koa();
@@ -53,6 +54,13 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(serve({rootDir: 'public', rootPath: '/public', maxage}));
 
-app.listen(process.env.PORT || '3000');
+const server = app.listen(process.env.PORT || '3000');
 
 log.info(`Listening on port ${process.env.PORT || '3000'}`);
+
+process.on('SIGINT', () => {
+    log.info('SIGINT signal received.');
+
+    server.close();
+    db.destroy();
+});
