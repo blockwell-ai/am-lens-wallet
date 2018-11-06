@@ -53,6 +53,22 @@
                                     </div>
                                 </div>
                             </div>
+                            {{#if securityToken}}
+                            <div class="row lock-tokens">
+                                <div class="input-field col s12">
+                                    <div>
+                                        <label>
+                                            <input type="checkbox" class="filled-in" name="locked"/>
+                                            <span>Lock Tokens</span>
+                                        </label>
+                                    </div>
+                                    <div class="input-description">
+                                        Choosing this will lock the sent tokens from being transferred by the
+                                        recipient. The lock will expire in <span class="lock-expiration">...</span>.
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
                             <button id="submit" class="btn waves-effect waves-light" type="submit">Send</button>
                         </form>
                     </div>

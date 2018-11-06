@@ -2,6 +2,7 @@ import axios from 'axios';
 import $ from 'cash-dom';
 import M from 'materialize-css';
 import * as util from './util';
+import {BigNumber} from 'bignumber.js';
 
 function renderAccounts(accounts) {
     const t = $('tbody.accounts');
@@ -38,14 +39,61 @@ function getAccounts() {
 }
 
 function renderBalance(context, balance, selector, symbol) {
-    context.find(selector).html(balance.toString() + ` <span>${symbol}</span>`);
+    context.find(selector).html(util.renderAmount(balance));
 }
 
 function getBalances(context, account) {
-    axios.get(`/proxy/tokens/${window.tokenId}/balances/${account}`)
-        .then(res => {
-            renderBalance(context, util.toDecimals(res.data.data, window.tokenDecimals), '.token1-balance', window.tokenSymbol);
+    if (window.tokenType === 'erc20_security') {
+        Promise.all([
+            axios.get(`/proxy/tokens/${window.tokenId}/balances/${account}`),
+            axios.get(`/proxy/contracts/${window.tokenId}/call/locksOf`, {params: {arg: account}})
+        ]).then(res => {
+            let balance = new BigNumber(res[0].data.data);
+            let {locks, locked} = util.parseLocks(res[1].data.data);
+            let unlocked = balance.minus(locked);
+
+            let lockRows = locks.map(it => {
+                return `
+                    <tr>
+                        <td>${it.time.format('lll')}</td>
+                        <td class="lock-amount">${util.renderAmount(it.amount)}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            $('.token1-details').html(`
+                <div class="label">Locked</div>
+                <div class="label">Total Available</div>
+                <div class="label"><a href="#" class="dropdown-trigger show-locks" data-target="locks1">Show Locks</a></div>
+                <div class="dropdown-content" id="locks1">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Unlock Time</th>
+                            <th class="lock-amount">Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody class="accounts">
+                            ${lockRows}
+                        </tbody>
+                    </table>
+                </div>
+             `);
+
+            M.Dropdown.init($('.token1-details .dropdown-trigger')[0], {constrainWidth: false});
+
+            $('.token1-balance').html(`
+                ${util.renderAmount(balance)}
+                <div class="locked">${util.renderAmount(locked)}</div>
+                <div class="available">${util.renderAmount(unlocked)}</div>
+            `);
         });
+    } else {
+        axios.get(`/proxy/tokens/${window.tokenId}/balances/${account}`)
+            .then(res => {
+                renderBalance(context, res.data.data, '.token1-balance', window.tokenSymbol);
+            });
+    }
 }
 
 export function init() {

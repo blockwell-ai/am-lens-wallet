@@ -1,9 +1,44 @@
 import axios from 'axios';
 import $ from 'jquery';
 import M from 'materialize-css';
-import toDate from 'date-fns/toDate'
-import format from 'date-fns/format'
+import * as moment from 'moment';
+import {BigNumber} from 'bignumber.js';
 import * as util from './util';
+
+async function renderSecurityError(data, $tx) {
+    const $status = $tx.find('.status');
+    const amount = new BigNumber(data.parameters[1]);
+    let res = await axios.get(`/proxy/tokens/${window.tokenId}/balances/${data.from}`);
+    const balance = new BigNumber(res.data.data);
+
+    if (amount.gt(balance)) {
+        $status.text('Error: Token balance too low to send the given amount.');
+        return;
+    }
+
+    res = await axios.get(`/proxy/contracts/${window.tokenId}/call/locksOf`, {
+        params: {
+            arg: data.from
+        }
+    });
+
+    let {locks, locked} = util.parseLocks(res.data.data);
+
+    const unlocked = balance.minus(locked);
+
+    if (amount.gt(unlocked)) {
+        let m = locks[0].time;
+        let time;
+        if (m.isAfter(util.inOneWeek)) {
+            time = 'on ' + m.format('MMM D, Y');
+        } else {
+            time = m.fromNow();
+        }
+        let nextAmount = util.toDecimals(locks[0].amount, window.tokenDecimals);
+
+        $status.text(`Error: Can't send tokens that are still locked. Your next unlock is ${time} for ${nextAmount} ${window.tokenSymbol}.`);
+    }
+}
 
 function renderTransaction(req, res) {
     let id = res.id;
@@ -39,7 +74,7 @@ function renderTransaction(req, res) {
         $from.text(data.from);
         $to.text(data.to);
         $amount.text(data.amount);
-        $time.text(format(toDate(data.created), 'h:mm:ss a'));
+        $time.text(moment(data.created).format('h:mm:ss a'));
         if (data.ended) {
             $progress.addClass('hidden');
         }
@@ -49,6 +84,9 @@ function renderTransaction(req, res) {
                 break;
             case 'error':
                 $status.addClass('error');
+                if (window.tokenType === 'erc20_security') {
+                    renderSecurityError(data, $tx);
+                }
                 break;
         }
     };
@@ -150,7 +188,21 @@ async function submit(ev) {
         value: util.toInteger(data.amount, window.tokenDecimals)
     };
 
-    axios.post(`/proxy/tokens/${data.token}/transfers`, body)
+    let url = `/proxy/tokens/${data.token}/transfers`;
+
+    // Security Tokens locked transfer
+    if (window.tokenType === 'erc20_security' && data.locked) {
+        url = `/proxy/contracts/${data.token}/send/transferAndLock`;
+        body = {
+            from: data.from,
+            arg: [
+                data.to,
+                util.toInteger(data.amount, window.tokenDecimals)
+            ]
+        }
+    }
+
+    axios.post(url, body)
         .then(res => {
             renderTransaction(data, res.data.data);
             $('#amount').val('');
@@ -201,4 +253,12 @@ export function init() {
             behavior: 'smooth'
         });
     });
+
+    if (window.tokenType === 'erc20_security') {
+        axios.get(`/proxy/contracts/${window.tokenId}/call/lockTime`)
+            .then(res => {
+                let time = moment().add(parseInt(res.data.data), 'seconds');
+                $('.lock-expiration').text(time.fromNow(true));
+            });
+    }
 }

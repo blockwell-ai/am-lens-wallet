@@ -33,10 +33,17 @@ middleware.addSession(app);
 
 template.setGlobalData({
     tokenId: conf.get('token_id'),
+    tokenType: conf.get('token_type'),
     tokenName: conf.get('token_name'),
     tokenSymbol: conf.get('token_symbol'),
     tokenDecimals: conf.get('token_decimals')
 });
+
+switch (conf.get('token_type')) {
+    case 'erc20_security':
+        template.setGlobalData({securityToken: true});
+        break;
+}
 
 app.use(template.handlebarsMiddleware);
 

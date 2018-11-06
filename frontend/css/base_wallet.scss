@@ -12,6 +12,7 @@ td.address {
   font-family: monospace;
   font-size: 0.8em;
 }
+
 td.default {
   i {
     font-size: 20px;
@@ -30,7 +31,6 @@ td.default {
   }
 
   .status {
-    text-transform: capitalize;
     font-style: italic;
   }
 
@@ -48,6 +48,10 @@ td.default {
 }
 
 .balance-wrap {
+  font-size: 13px;
+}
+
+.input-description {
   font-size: 13px;
 }
 
@@ -75,6 +79,7 @@ td.default {
     padding-top: 3px;
   }
 }
+
 .to-account-selector {
   display: flex;
   margin-left: 12px;
@@ -87,6 +92,27 @@ td.default {
     background: transparent;
   }
 }
+
 .input-field.to-account {
   margin-top: 0;
+}
+
+.balances {
+  td {
+    vertical-align: top;
+  }
+  .label {
+    margin-left: 20px;
+  }
+  .available {
+    font-weight: bold;
+  }
+}
+
+#locks1 {
+  padding: 20px;
+}
+
+.lock-amount {
+  padding-left: 20px;
 }

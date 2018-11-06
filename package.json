@@ -1,6 +1,6 @@
 {
     "name": "am-lens-wallet",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "private": true,
     "dependencies": {
         "am-lens": "https://github.com/blockwell-ai/am-lens.git#1.0.8",
