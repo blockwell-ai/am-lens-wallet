@@ -29,8 +29,11 @@ export function parseLocks(rawLocks) {
             amount: new BigNumber(rawLocks[i * 2]),
             time: moment.unix(parseInt(rawLocks[i * 2 + 1]))
         };
-        locks.push(lock);
-        locked = locked.plus(lock.amount);
+
+        if (lock.time.isAfter()) {
+            locks.push(lock);
+            locked = locked.plus(lock.amount);
+        }
     }
 
     locks.sort((a,b) => a.time - b.time);
